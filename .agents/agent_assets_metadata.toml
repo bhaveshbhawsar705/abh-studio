@@ -1,0 +1,43 @@
+uploads = []
+
+[[generated]]
+id = "40nken4wTu-i_0ecRDAi7"
+uri = "file://artifacts/abh-studio/src/assets/images/project-1.png"
+type = "image"
+title = "Neon abstract browser frame"
+
+[[generated]]
+id = "r6v7HKgVmekcZNSnWHV_C"
+uri = "file://artifacts/abh-studio/src/assets/images/project-2.png"
+type = "image"
+title = "Modern mobile app mockup"
+
+[[generated]]
+id = "YBaOiNVHRszkCHHWZhPVd"
+uri = "file://artifacts/abh-studio/src/assets/images/project-3.png"
+type = "image"
+title = "Abstract geometric web3 visual"
+
+[[generated]]
+id = "6KQW2LfEUm4sxO6seb6s0"
+uri = "file://artifacts/abh-studio/src/assets/images/project-4.png"
+type = "image"
+title = "E-commerce dark mode mockup"
+
+[[generated]]
+id = "GGc0-hOOSqyZFlAZiDPQr"
+uri = "file://artifacts/abh-studio/public/og-image.png"
+type = "image"
+title = "ABH Studio OG image dark blue"
+
+[[outputs]]
+id = "HAZ15zVLlm_fo7BS_EtjH"
+uri = "file://abh-studio-netlify-static.tar.gz"
+type = "unspecified"
+title = "ABH Studio — Static Build with OG Image (Ready to Deploy)"
+
+[[outputs]]
+id = "1vd6X3w2hH4axW3Ki7QMl"
+uri = "file://abh-studio-fullproject.tar.gz"
+type = "unspecified"
+title = "ABH Studio — Full Project (VPS / Self-host)"
