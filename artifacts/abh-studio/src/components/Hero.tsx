@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, use
 import { ArrowRight } from "lucide-react";
 
 const SPOTS_REMAINING = 2;
-const BOOKING_MONTH = "June";
+const BOOKING_MONTH = "July";
 const TOTAL_SLOTS = 4;
 
 function useSpotsCounter(target: number, delay = 1600) {

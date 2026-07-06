@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 
 const SPOTS_REMAINING = 2;
-const BOOKING_MONTH = "June";
+const BOOKING_MONTH = "July";
 const TOTAL_SLOTS = 4;
 
 function useSpotsCounter(target: number, delay = 1800) {
