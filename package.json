@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "npx pnpm@9 install && npx pnpm@9 --filter @workspace/abh-studio run build",
+    "build": "npx pnpm@9 install && npx pnpm@9 --filter @workspace/abh-studio run build && node scripts/copy-dist.js",
     "start": "node server.js"
   },
   "dependencies": {
