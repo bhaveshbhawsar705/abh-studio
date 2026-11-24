@@ -9,18 +9,66 @@ const app = express();
 
 app.use(express.json());
 
-// API route for contact submissions
-app.post("/api/contact", (req, res) => {
-  const { name, email, phone, contactMethod, projectType, message } = req.body || {};
+// API route for contact submissions (supports both form payloads + optional Google Sheets)
+app.post("/api/contact", async (req, res) => {
+  const body = req.body || {};
+  const name = body.name || body.contact || "Anonymous";
+  const contactMethod = body.contactMethod || "WHATSAPP";
+  const email = body.email || (contactMethod === "EMAIL" ? body.contact : "");
+  const phone = body.phone || (contactMethod === "PHONE" || contactMethod === "WHATSAPP" ? body.contact : "");
+  const projectType = body.projectType || body.service || "General Inquiry";
+  const message = body.message || (body.timeline ? `Timeline: ${body.timeline}, Size: ${body.size}` : "");
+
   console.log("Inquiry received:", {
     name,
     contactMethod,
     email,
     phone,
     projectType,
+    message,
     timestamp: new Date().toISOString(),
   });
+
+  // Optional Google Sheets logging
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY && process.env.GOOGLE_SHEET_ID) {
+    try {
+      const { appendContactSubmission } = await import("./server/googleSheets.js");
+      await appendContactSubmission({
+        service: projectType,
+        size: body.size || "Standard",
+        timeline: body.timeline || "Immediate",
+        contact_method: contactMethod,
+        contact: phone || email || name,
+        created_at: new Date().toISOString(),
+      });
+    } catch (sheetErr) {
+      console.error("Google Sheets append error:", sheetErr.message);
+    }
+  }
+
   res.json({ success: true, message: "Inquiry received" });
+});
+
+// Analytics event endpoint
+app.post("/api/analytics/event", async (req, res) => {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY && process.env.GOOGLE_SHEET_ID) {
+    try {
+      const { appendAnalyticsEvent } = await import("./server/googleSheets.js");
+      const { eventType, path: eventPath } = req.body || {};
+      if (eventType) {
+        await appendAnalyticsEvent({
+          event_type: String(eventType).trim(),
+          path: String(eventPath || "").slice(0, 512),
+          referrer: req.get("referer") || "",
+          user_agent: req.get("user-agent") || "",
+          created_at: new Date().toISOString(),
+        });
+      }
+    } catch (sheetErr) {
+      console.error("Google Sheets analytics error:", sheetErr.message);
+    }
+  }
+  res.status(204).end();
 });
 
 // Determine static dist directory (support both root dist and artifacts path)
@@ -35,7 +83,7 @@ const distDir = possibleDistDirs.find((dir) => fs.existsSync(path.join(dir, "ind
 
 app.use(express.static(distDir));
 
-// SPA catch-all (Express 4 & 5 compatible)
+// SPA catch-all (Express 4 & 5 compatible unpathed fallback)
 app.use((_req, res) => {
   const indexPath = path.join(distDir, "index.html");
   if (fs.existsSync(indexPath)) {
