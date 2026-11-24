@@ -62,24 +62,6 @@ const services = [
       </svg>
     ),
   },
-  {
-    num: "04",
-    title: "Meta Agency Ad Accounts",
-    sub: "Enterprise Ad Infrastructure",
-    description:
-      "Whitelisted, aged Agency Business Manager accounts with zero daily spend caps and direct rep support. Shared directly to your BM with 100% asset autonomy, postpaid billing, and a 2-hour replacement SLA.",
-    tags: ["No Daily Spend Caps", "Partner Access (No RDP)", "Postpaid Own Card", "18% GST Bypass", "2h Swap SLA"],
-    color: "#f59e0b",
-    shape: (
-      <svg viewBox="0 0 200 200" className="w-full h-full" fill="none">
-        <polygon points="100,20 180,65 180,155 100,200 20,155 20,65" stroke="currentColor" strokeWidth="1.5" opacity="0.35" />
-        <circle cx="100" cy="110" r="45" stroke="currentColor" strokeWidth="1.5" opacity="0.25" />
-        <circle cx="100" cy="110" r="18" fill="currentColor" opacity="0.5" />
-        <line x1="100" y1="20" x2="100" y2="200" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-        <line x1="20" y1="110" x2="180" y2="110" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-      </svg>
-    ),
-  },
 ];
 
 export function Services() {

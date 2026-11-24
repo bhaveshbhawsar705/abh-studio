@@ -824,7 +824,7 @@ export function Contact() {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent className="bg-[#080812] border border-white/10 rounded-none backdrop-blur-xl">
-                                {["Web Development", "Social Media Management", "Enterprise Meta Agency Ad Accounts", "Digital Marketing", "Full Digital Package"].map((s, i) => (
+                                {["Web Development", "Social Media Management", "Digital Marketing", "Full Digital Package"].map((s, i) => (
                                   <SelectItem key={i} value={s.toLowerCase().replace(/ /g, "-")} className="text-white/70 hover:text-white font-light text-sm">
                                     {s}
                                   </SelectItem>

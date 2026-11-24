@@ -11,7 +11,6 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 const Services = lazy(() => import("@/components/Services").then(m => ({ default: m.Services })));
-const AgencyAds = lazy(() => import("@/components/AgencyAds").then(m => ({ default: m.AgencyAds })));
 const HorizontalShowcase = lazy(() => import("@/components/HorizontalShowcase").then(m => ({ default: m.HorizontalShowcase })));
 const Why = lazy(() => import("@/components/Why").then(m => ({ default: m.Why })));
 const Process = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })));
@@ -139,7 +138,6 @@ function Home() {
         <Hero />
         <Suspense fallback={null}>
           <Services />
-          <AgencyAds />
           <HorizontalShowcase />
           <Why />
           <Process />

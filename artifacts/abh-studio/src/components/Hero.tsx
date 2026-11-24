@@ -373,10 +373,6 @@ export function Hero() {
               <span className="text-primary/40">—</span>
               Social Media Management
               <span className="text-primary/40">—</span>
-              Enterprise Meta Ad Accounts
-              <span className="text-amber-400/60">—</span>
-              Zero Spend Caps
-              <span className="text-primary/40">—</span>
               Digital Marketing
               <span className="text-primary/40">—</span>
               UI/UX Design
