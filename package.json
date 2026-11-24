@@ -7,6 +7,9 @@
     "build": "npx pnpm@9 install && npx pnpm@9 --filter @workspace/abh-studio run build && node scripts/copy-dist.js",
     "start": "node server.js"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "express": "^4.21.2"
   },
