@@ -8,7 +8,9 @@ const NAV_HEIGHT = 64;
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+  const nav = document.querySelector("header");
+  const navHeight = nav ? nav.getBoundingClientRect().height : 68;
+  const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 14;
   window.scrollTo({ top, behavior: "smooth" });
 }
 
@@ -119,8 +121,8 @@ export function Navigation() {
           })}
 
           <Button
-            className="rounded-full font-semibold px-6 tracking-wide"
-            onClick={() => document.getElementById("contact-fields")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="rounded-full font-semibold px-6 tracking-wide cursor-pointer"
+            onClick={() => smoothScrollTo("contact")}
           >
             Start a Project
           </Button>
@@ -200,8 +202,8 @@ export function Navigation() {
               transition={{ delay: 0.32, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <Button
-                className="w-full rounded-2xl py-6 text-base font-bold tracking-tight"
-                onClick={() => { setMobileMenuOpen(false); setTimeout(() => document.getElementById("contact-fields")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); }}
+                className="w-full rounded-2xl py-6 text-base font-bold tracking-tight cursor-pointer"
+                onClick={() => { setMobileMenuOpen(false); setTimeout(() => smoothScrollTo("contact"), 80); }}
               >
                 Start a Project →
               </Button>

@@ -95,7 +95,7 @@ export default function PrivacyPolicy() {
         </Section>
 
         <Section title="10. Contact">
-          <p>Questions about this policy? Reach us at <a href="mailto:contact@abhstudio.in" className="text-blue-400/80 hover:text-blue-400 transition-colors">contact@abhstudio.in</a> or via <a href="https://wa.me/919685743434" target="_blank" rel="noopener noreferrer" className="text-blue-400/80 hover:text-blue-400 transition-colors">WhatsApp</a>.</p>
+          <p>Questions about this policy? Reach us via <a href="https://wa.me/919893023434" target="_blank" rel="noopener noreferrer" className="text-blue-400/80 hover:text-blue-400 transition-colors">WhatsApp</a>.</p>
         </Section>
       </div>
     </div>

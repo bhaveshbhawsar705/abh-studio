@@ -8,8 +8,12 @@ const router = Router();
 const projectLabels: Record<string, string> = {
   "web-development": "Web Development",
   "social-media": "Social Media Management",
+  "social-media-management": "Social Media Management",
   "digital-marketing": "Digital Marketing",
   "full-package": "Full Digital Package",
+  "full-digital-package": "Full Digital Package",
+  "enterprise-meta-agency-ad-accounts": "Enterprise Meta Agency Ad Accounts",
+  "agency-ads": "Enterprise Meta Agency Ad Accounts",
 };
 
 router.post("/contact", async (req, res) => {

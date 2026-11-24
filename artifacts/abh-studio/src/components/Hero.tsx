@@ -3,8 +3,20 @@ import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, use
 import { ArrowRight } from "lucide-react";
 
 const SPOTS_REMAINING = 2;
-const BOOKING_MONTH = "July";
+const BOOKING_MONTH = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date());
 const TOTAL_SLOTS = 4;
+
+function scrollToTarget(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const nav = document.querySelector("header");
+  const navHeight = nav ? nav.getBoundingClientRect().height : 70;
+  const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({
+    top: elementPosition - navHeight - 12,
+    behavior: "smooth",
+  });
+}
 
 function useSpotsCounter(target: number, delay = 1600) {
   const [count, setCount] = useState(0);
@@ -334,21 +346,21 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 1.0 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <a
-              href="#process"
+            <button
+              onClick={() => scrollToTarget("services")}
               data-testid="hero-cta-work"
-              className="group flex items-center gap-3 px-7 py-4 bg-primary text-white font-bold text-sm tracking-wider uppercase hover:bg-primary/90 transition-all duration-300 rounded-none"
+              className="group flex items-center gap-3 px-7 py-4 bg-primary text-white font-bold text-sm tracking-wider uppercase hover:bg-primary/90 transition-all duration-300 rounded-none cursor-pointer"
             >
-              View Our Work
+              Explore Our Work
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#contact"
+            </button>
+            <button
+              onClick={() => scrollToTarget("contact")}
               data-testid="hero-cta-contact"
-              className="flex items-center gap-3 px-7 py-4 border border-white/15 text-white/70 font-bold text-sm tracking-wider uppercase hover:border-white/40 hover:text-white transition-all duration-300 rounded-none"
+              className="flex items-center gap-3 px-7 py-4 border border-white/15 text-white/70 font-bold text-sm tracking-wider uppercase hover:border-white/40 hover:text-white transition-all duration-300 rounded-none cursor-pointer"
             >
               Start a Project
-            </a>
+            </button>
           </motion.div>
         </div>
       </div>
@@ -360,6 +372,10 @@ export function Hero() {
               Web Development
               <span className="text-primary/40">—</span>
               Social Media Management
+              <span className="text-primary/40">—</span>
+              Enterprise Meta Ad Accounts
+              <span className="text-amber-400/60">—</span>
+              Zero Spend Caps
               <span className="text-primary/40">—</span>
               Digital Marketing
               <span className="text-primary/40">—</span>

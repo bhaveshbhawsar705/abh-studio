@@ -11,6 +11,7 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 const Services = lazy(() => import("@/components/Services").then(m => ({ default: m.Services })));
+const AgencyAds = lazy(() => import("@/components/AgencyAds").then(m => ({ default: m.AgencyAds })));
 const HorizontalShowcase = lazy(() => import("@/components/HorizontalShowcase").then(m => ({ default: m.HorizontalShowcase })));
 const Why = lazy(() => import("@/components/Why").then(m => ({ default: m.Why })));
 const Process = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })));
@@ -21,7 +22,7 @@ const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.
 const PrivacyPolicy = lazy(() => import("@/pages/privacy"));
 const TermsOfService = lazy(() => import("@/pages/terms"));
 
-const WA_NUMBER = "919685743434";
+const WA_NUMBER = "919893023434";
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=Hi%20ABH%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
 
 function WhatsAppButton() {
@@ -87,7 +88,14 @@ function StickyMobileCTA() {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <button
-        onClick={() => document.getElementById("contact-fields")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        onClick={() => {
+          const el = document.getElementById("contact");
+          if (el) {
+            const nav = document.querySelector("header");
+            const navHeight = nav ? nav.getBoundingClientRect().height : 68;
+            window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navHeight - 14, behavior: "smooth" });
+          }
+        }}
         className="flex items-center gap-2 rounded-full py-2.5 px-5 font-display font-semibold text-sm tracking-tight active:scale-95 transition-transform whitespace-nowrap"
         style={{
           background: "rgba(124,58,237,0.15)",
@@ -131,6 +139,7 @@ function Home() {
         <Hero />
         <Suspense fallback={null}>
           <Services />
+          <AgencyAds />
           <HorizontalShowcase />
           <Why />
           <Process />

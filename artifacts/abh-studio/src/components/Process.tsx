@@ -318,8 +318,15 @@ function MobileProcess() {
 
       {/* CTA */}
       <button
-        onClick={() => document.getElementById("contact-fields")?.scrollIntoView({ behavior: "smooth", block: "start" })}
-        className="mt-8 flex items-center justify-center gap-3 w-full rounded-2xl py-4 px-6 font-display font-bold text-base tracking-tight transition-opacity active:opacity-75"
+        onClick={() => {
+          const el = document.getElementById("contact");
+          if (el) {
+            const nav = document.querySelector("header");
+            const navHeight = nav ? nav.getBoundingClientRect().height : 68;
+            window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navHeight - 14, behavior: "smooth" });
+          }
+        }}
+        className="mt-8 flex items-center justify-center gap-3 w-full rounded-2xl py-4 px-6 font-display font-bold text-base tracking-tight transition-opacity active:opacity-75 cursor-pointer"
         style={{
           background: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
           boxShadow: "0 0 32px rgba(124,58,237,0.35)",

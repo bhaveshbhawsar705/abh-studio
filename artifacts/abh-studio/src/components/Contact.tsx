@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 
 const SPOTS_REMAINING = 2;
-const BOOKING_MONTH = "July";
+const BOOKING_MONTH = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date());
 const TOTAL_SLOTS = 4;
 
 function useSpotsCounter(target: number, delay = 1800) {
@@ -373,18 +373,27 @@ export function Contact() {
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const apiBase = import.meta.env.VITE_API_URL ? String(import.meta.env.VITE_API_URL).replace(/\/$/, "") : "";
+      const res = await fetch(`${apiBase}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      const data = await res.json() as { success?: boolean; error?: string };
-      if (!res.ok || !data.success) throw new Error(data.error ?? "Something went wrong");
-      toast.success("Message sent!", { description: "We'll get back to you within 24 hours." });
+      const data = await res.json().catch(() => ({})) as { success?: boolean; error?: string };
+      if (!res.ok || (!data.success && data.error)) {
+        throw new Error(data.error ?? "Failed to submit inquiry");
+      }
+      toast.success("Inquiry received!", { description: "We'll get back to you within 24 hours." });
       setSent(true);
       form.reset();
     } catch {
-      toast.error("Failed to send", { description: "Please email us at contact@abhstudio.in" });
+      toast.error("Could not send message", {
+        description: "Please tap below to chat with us directly on WhatsApp.",
+        action: {
+          label: "WhatsApp",
+          onClick: () => window.open("https://wa.me/919893023434?text=Hi%20ABH%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project.", "_blank"),
+        },
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -569,15 +578,7 @@ export function Contact() {
         {/* Mobile-only info strip */}
         <div className="flex lg:hidden items-center gap-3 mb-8 flex-wrap">
           <a
-            href="mailto:contact@abhstudio.in"
-            className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-white/70 hover:text-blue-400 transition-colors"
-            style={{ border: "1px solid rgba(79,140,255,0.18)", background: "rgba(79,140,255,0.05)" }}
-          >
-            <span className="text-base">✉</span>
-            contact@abhstudio.in
-          </a>
-          <a
-            href="https://wa.me/919685743434?text=Hi%20ABH%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project."
+            href="https://wa.me/919893023434?text=Hi%20ABH%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors"
@@ -608,12 +609,12 @@ export function Contact() {
             <div className="space-y-6">
               {[
                 {
-                  icon: "✉",
+                  icon: "💬",
                   label: "Direct Line",
-                  value: "contact@abhstudio.in",
-                  href: "mailto:contact@abhstudio.in",
-                  color: "rgba(79,140,255,0.15)",
-                  borderColor: "rgba(79,140,255,0.2)",
+                  value: "+91 9893023434",
+                  href: "https://wa.me/919893023434?text=Hi%20ABH%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project.",
+                  color: "rgba(37,211,102,0.12)",
+                  borderColor: "rgba(37,211,102,0.25)",
                 },
                 {
                   icon: "◎",
@@ -823,7 +824,7 @@ export function Contact() {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent className="bg-[#080812] border border-white/10 rounded-none backdrop-blur-xl">
-                                {["Web Development", "Social Media Management", "Digital Marketing", "Full Digital Package"].map((s, i) => (
+                                {["Web Development", "Social Media Management", "Enterprise Meta Agency Ad Accounts", "Digital Marketing", "Full Digital Package"].map((s, i) => (
                                   <SelectItem key={i} value={s.toLowerCase().replace(/ /g, "-")} className="text-white/70 hover:text-white font-light text-sm">
                                     {s}
                                   </SelectItem>

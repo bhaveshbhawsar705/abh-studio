@@ -1,15 +1,16 @@
 {
-  "name": "workspace",
-  "version": "0.0.0",
+  "name": "abh-studio",
+  "version": "1.0.0",
+  "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "build": "npx pnpm@9 install && npx pnpm@9 --filter @workspace/abh-studio run build",
+    "start": "node server.js"
   },
-  "private": true,
+  "dependencies": {
+    "express": "^4.21.2"
+  },
   "devDependencies": {
-    "typescript": "~5.9.2",
-    "prettier": "^3.8.1"
+    "typescript": "~5.9.2"
   }
 }
